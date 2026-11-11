@@ -13,11 +13,14 @@ class DataIngestion:
 
         self.adata = None
         self.train_data = None
+        self.train_data_type = None
 
     def load(self, target_path, train_path, train_mode="text"):
 
         self.adata = self.target_loader.load_data(target_path).adata
 
         self.train_data = self.train_loader.load_data(train_path, mode=train_mode).data
+
+        self.train_data_type = train_mode
 
         return self
