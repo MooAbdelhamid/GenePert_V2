@@ -8,6 +8,7 @@ import scanpy as sc
 class BuildTarget:
     def __init__(self, adata):
         self.adata = adata
+        self.Y = None
 
     def filter_cells(self, column="perturbation"):
         """Remove cells without valid perturbation labels."""
@@ -92,6 +93,6 @@ class BuildTarget:
 
         self.log_transform()
 
-        Y = self.mean_expressions()
+        self.Y = self.mean_expressions()
 
-        return Y
+        return self
