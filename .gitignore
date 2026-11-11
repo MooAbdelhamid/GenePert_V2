@@ -13,3 +13,6 @@ venv/
 
 # Environment variables
 .env
+
+data
+test.ipynb

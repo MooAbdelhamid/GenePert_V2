@@ -24,15 +24,15 @@ class LoadTrain:
             raise FileNotFoundError(f"Dataset not found: {self.filePath}")
 
         # check for file extention
-        extension = self.filePath.name.split(".")[1]
+        extension = self.filePath.suffix.lower()
 
         # read text descriptors
         if self.mode == "text":
-            if extension == "csv":
+            if extension == ".csv":
                 self.data = pd.read_csv(self.filePath)
                 print("Dataset loaded")
 
-            elif extension in ["xls", "xlsx"]:
+            elif extension in [".xls", ".xlsx"]:
                 self.data = pd.read_excel(self.filePath)
                 print("Dataset loaded")
             else:
