@@ -13,7 +13,7 @@ class BuildTrain:
         self.gene_descriptions = None
         self.model = None
 
-    def load_precomputed    (self):
+    def load_precomputed(self):
         pass
 
     def load_gene_descriptions(self):
