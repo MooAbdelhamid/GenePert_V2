@@ -4,30 +4,33 @@ To be written
 
 from pathlib import Path
 
-import scanpy as sc
+from utils import read_target
 
 
 class LoadTarget:
     def __init__(self):
-        self.adata = None
+        self.data = None
         self.filePath = None
         self.mode = None
 
     def load_data(self, path, mode="path"):
         """
-        Modes: Path, Object Through API
+        Modes:
+        - path: Load AnnData from an H5AD file.
+        - object: Receive an existing AnnData object.
         """
-        self.filePath = Path(path)
         self.mode = mode
 
         if self.mode == "path":
-            if not self.filePath.exists():
-                raise FileNotFoundError(f"Dataset not found: {self.filePath}")
+            self.filePath = Path(path)
+            self.data = read_target(self.filePath)
 
-            self.adata = sc.read_h5ad(self.filePath)
+        elif self.mode == "object":
+            self.data = path
 
-            print(
-                f"Dataset loaded: {self.adata.n_obs} cells, {self.adata.n_vars} genes"
-            )
+        else:
+            raise ValueError(f"Unsupported loading mode: {self.mode}")
+
+        print(f"Dataset loaded: {self.data.n_obs} cells, {self.data.n_vars} genes")
 
         return self
